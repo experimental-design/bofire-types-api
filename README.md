@@ -1,5 +1,9 @@
 # BoFire Types API
 
+[![Test](https://github.com/experimental-design/bofire-types-api/workflows/Tests/badge.svg)](https://github.com/experimental-design/bofire-types-api/actions?query=workflow%3ATests)
+[![Lint](https://github.com/experimental-design/bofire-types-api/workflows/Lint/badge.svg)](https://github.com/experimental-design/bofire-types-api/actions?query=workflow%3ALint)
+
+
 In BoFire, all data model entities have a type assigned to them. This type directly impacts the properties required / allowed for these entities. For example, a feature can be of type `CategoricalInput` or `ContinuousOutput` (among others). Each of these types has a different json schema which describes the properties required in the entity's spec (a json string).
 
 This API can be used to:
@@ -215,31 +219,25 @@ The following environment variables can be used:
   - set to True to add dummy types
   - this is used / required for testing
 
-## local dev setup
+## Local dev setup
 
 Use the following command to set and run the API locally as well as run the unit tests.
 
-### setup
+### Setup
 
 ```bash
-python3.9 -m virtualenv -p python3.9 .venv
-source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### run
+### Run
 
 ```bash
-source .venv/bin/activate
-cd src/
 export ADD_DUMMY_TYPES=True
-uvicorn app:app --reload
+uvicorn --app-dir app:app --reload
 ```
 
-### run unit tests
+### Run unit tests
 
 ```bash
-source .venv/bin/activate
-cd tests
-pytest .
+pytest
 ```

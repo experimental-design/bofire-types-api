@@ -1,7 +1,7 @@
 import os
 import random
 import uuid
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 import requests
 from pytest import fixture
@@ -31,7 +31,7 @@ def rand_str() -> str:
 
 @fixture
 def all_keys(client) -> Dict[str, List[str]]:
-    return client.get(f"/keys").json()
+    return client.get("/keys").json()
 
 
 @fixture

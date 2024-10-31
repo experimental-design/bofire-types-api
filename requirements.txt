@@ -1,0 +1,6 @@
+bofire
+uvicorn
+fastapi
+pytest
+jsonschema
+requests

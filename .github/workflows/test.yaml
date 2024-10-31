@@ -31,8 +31,8 @@ jobs:
         run: uv pip install -r requirements.txt --system
 
       - name: Run domain-only test
-        run: | 
+        run: |
           export ADD_DUMMY_TYPES=True
-          uvicorn --app-dir=app app:app & sleep 10
+          uvicorn --app-dir=app app:app > dev/null & sleep 10
           pytest
           kill %1

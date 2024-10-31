@@ -27,7 +27,7 @@ jobs:
           enable-cache: true
 
       - name: Install dependencies
-        run: uv pip install pre-commit ".[all]" --system
+        run: uv pip install pre-commit --system
 
       - name: Run pre-commit
         run: pre-commit run --all-files --show-diff-on-failure

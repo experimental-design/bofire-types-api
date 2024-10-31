@@ -33,5 +33,6 @@ jobs:
       - name: Run domain-only test
         run: | 
           export ADD_DUMMY_TYPES=True
-          uvicorn --app-dir=app app:app &
+          uvicorn --app-dir=app app:app & sleep 10
           pytest
+          kill %1

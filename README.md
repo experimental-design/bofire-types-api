@@ -17,14 +17,14 @@ pip install -r requirements.txt
 Run the app:
 
 ```bash
-uvicorn  --reload --port 8000 --app-dir app app:app
+uvicorn --port 8000 --app-dir app app:app
 ```
 
 If you want to run tests, overwrite the `ADD_DUMMY_TYPES` env var:
 
 ```bash
 export ADD_DUMMY_TYPES=True
-uvicorn  --reload --port 8000 --app-dir app app:app
+uvicorn --port 8000 --app-dir app app:app
 ```
 
 ### Run containerized
@@ -32,7 +32,7 @@ uvicorn  --reload --port 8000 --app-dir app app:app
 Build the image:
 
 ```bash
-docker build -f Dockerfile -t bofire-types-api:latest
+docker build -f Dockerfile -t bofire-types-api:latest .
 ```
 
 Run a container:
@@ -66,19 +66,5 @@ export TYPES_API_PATH="http://localhost:8000"
 pytest tests/
 ```
 
-
-
-
-
-
-
-```
-services:
-  types:
-    build: ./types
-    environment:
-      ADD_DUMMY_TYPES: "True"
-    ports:
-      - 5008:80
-```
+The tests will only work if the api provides additional types. You must enable them by setting the var `ADD_DUMMY_TYPES=True` in the app's environment.
 

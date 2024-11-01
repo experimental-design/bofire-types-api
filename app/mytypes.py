@@ -48,16 +48,17 @@ def to_type_models(types: List[dict], group: str) -> Dict[str, Type]:
     }
 
 
-feature_types = to_type_models(get_types_from_union(AnyFeature), "feature")
-constraint_types = to_type_models(get_types_from_union(AnyConstraint), "constraint")
-objective_types = to_type_models(get_types_from_union(AnyObjective), "objective")
-acquisition_function_types = to_type_models(
-    get_types_from_union(AnyAcquisitionFunction), "acquisition-function"
+feature_types = Type.from_union(AnyFeature, "feature")
+constraint_types = Type.from_union(AnyConstraint, "constraint")
+objective_types = Type.from_union(AnyObjective, "objective")
+acquisition_function_types = Type.from_union(
+    AnyAcquisitionFunction, "acquisition-function"
 )
-kernel_types = to_type_models(get_types_from_union(AnyKernel), "kernel")
-prior_types = to_type_models(get_types_from_union(AnyPrior), "prior")
-strategy_types = to_type_models(get_types_from_union(AnyStrategy), "strategy")
-surrogate_types = to_type_models(get_types_from_union(AnySurrogate), "surrogate")
+kernel_types = Type.from_union(AnyKernel, "kernel")
+prior_types = Type.from_union(AnyPrior, "prior")
+strategy_types = Type.from_union(AnyStrategy, "strategy")
+surrogate_types = Type.from_union(AnySurrogate, "surrogate")
+domain_types = Type.from_types([Domain, Inputs, Outputs], "domain")
 
 ALL_TYPES = {
     "feature": feature_types,
@@ -68,17 +69,10 @@ ALL_TYPES = {
     "prior": prior_types,
     "strategy": strategy_types,
     "surrogate": surrogate_types,
-    "domain": to_type_models(
-        [
-            get_type(
-                type_,
-            )
-            for type_ in [Domain, Inputs, Outputs]
-        ],
-        "domain",
-    ),
+    "domain": domain_types,
 }
 
+# TODO: update this
 ALL_CLASSES = {
     "feature": {x.__name__: x for x in AnyFeature.__args__},
     "constraint": {x.__name__: x for x in AnyConstraint.__args__},
@@ -90,6 +84,8 @@ ALL_CLASSES = {
     "surrogate": {x.__name__: x for x in AnySurrogate.__args__},
     "domain": {x.__name__: x for x in [Domain, Inputs, Outputs]},
 }
+
+ALL_CLASSES = {}
 
 if os.getenv("ADD_DUMMY_TYPES", "False").lower() == "true":
 

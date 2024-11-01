@@ -29,16 +29,17 @@ class Type(BaseModel):
         cls,
         types: list,
         group: str,
-    ) -> List["Type"]:
-        return [cls.from_type(type_, group) for type_ in types]
+    ) -> dict[str, "Type"]:
+        types = {}
+        for type_ in types:
+            type_ = cls.from_type(type_, group)
+            types[type_.key] = type_
+        return types
 
     @classmethod
     def from_union(
         cls,
         union: _UnionGenericAlias,
         group: str,
-    ) -> List["Type"]:
-        types = []
-        for type_ in union.__args__:
-            types.append(cls.from_type(type_, group))
-        return types
+    ) -> dict[str, "Type"]:
+        return cls.from_types(union.__args__, group)

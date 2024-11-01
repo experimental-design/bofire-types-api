@@ -14,7 +14,7 @@ from bofire.data_models.api import (
     Inputs,
     Outputs,
 )
-from models.type import Type
+from models import Type
 from pydantic import BaseModel
 
 

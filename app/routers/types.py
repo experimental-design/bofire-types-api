@@ -1,10 +1,9 @@
 from typing import Dict, List
 
 from fastapi import APIRouter, HTTPException
-from models.type import AllTypes, GroupTypes, Type, ValidationResult
-from mytypes.all import ALL_CLASSES, ALL_TYPES
+from models import AllTypes, GroupTypes, Type, ValidationResult
+from mytypes import ALL_CLASSES, ALL_TYPES
 from pydantic import ValidationError
-
 
 router = APIRouter(prefix="", tags=["types"])
 

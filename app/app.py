@@ -1,14 +1,12 @@
 from fastapi import FastAPI
-from routers.types import router as types_router
-from starlette.responses import RedirectResponse
+from routers import types_router, versions_router
+from routers.versions import router as versions_router
 
-
-app = FastAPI(title="BoFire Types API", version="0.1.0", root_path="/")
-
-
-@app.get("/", include_in_schema=False)
-async def redirect():
-    return RedirectResponse(url="/docs")
-
+app = FastAPI(
+    title="BoFire Types API",
+    version="0.0.1",
+    root_path="/",
+)
 
 app.include_router(types_router)
+app.include_router(versions_router)

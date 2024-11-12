@@ -173,43 +173,6 @@ If an invalid `group_key` or `type_key` is provided, an error message with statu
 }
 ```
 
-### POST `/types/{group_key}/{type_key}/validate-db-schema`
-
-The data to validate against the `dbSchema` must be specified in the request body, e.g.:
-
-```json
-{
-  "name": "my variable"
-}
-```
-
-If the data is valid according to the `typeSchema`, the following result is returned:
-
-```json
-{
-  "valid": true,
-  "details": "OK"
-}
-```
-
-If the data is invalid, the following result is returned:
-
-```json
-{
-  "valid": false,
-  "details": "[] is too short\n\nFailed validating 'minItems' in schema['properties']['categories']:\n    {'items': {'$ref': '#/definitions/Category'},\n     'minItems': 1,\n     'title': 'Categories',\n     'type': 'array'}\n\nOn instance['categories']:\n    []"
-}
-```
-
-If an invalid `group_key` or `type_key` is provided, an error message with status code 404 is returned.
-
-```json
-{
-  "detail": "No type CategoricalInput_ for group variable exists."
-}
-```
-
-
 
 ## Env
 

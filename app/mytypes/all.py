@@ -14,6 +14,7 @@ from bofire.data_models.api import (
     Inputs,
     Outputs,
 )
+from bofire.data_models.dataframes.api import Candidates, Experiments
 from models.type import Type
 from pydantic import BaseModel
 
@@ -59,6 +60,7 @@ prior_types = to_type_models(get_types_from_union(AnyPrior), "prior")
 strategy_types = to_type_models(get_types_from_union(AnyStrategy), "strategy")
 surrogate_types = to_type_models(get_types_from_union(AnySurrogate), "surrogate")
 
+
 ALL_TYPES = {
     "feature": feature_types,
     "constraint": constraint_types,
@@ -77,6 +79,15 @@ ALL_TYPES = {
         ],
         "domain",
     ),
+    "dataframe": to_type_models(
+        [
+            get_type(
+                type_,
+            )
+            for type_ in [Candidates, Experiments]
+        ],
+        "dataframe",
+    ),
 }
 
 ALL_CLASSES = {
@@ -89,6 +100,7 @@ ALL_CLASSES = {
     "strategy": {x.__name__: x for x in AnyStrategy.__args__},
     "surrogate": {x.__name__: x for x in AnySurrogate.__args__},
     "domain": {x.__name__: x for x in [Domain, Inputs, Outputs]},
+    "dataframe": {x.__name__: x for x in [Candidates, Experiments]},
 }
 
 if os.getenv("ADD_DUMMY_TYPES", "False").lower() == "true":
